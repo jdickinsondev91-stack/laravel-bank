@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Jobs\ProcessDailyExchangeRates;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Schedule::job(new ProcessDailyExchangeRates)
+    ->daily()
+    ->at('00:00')
+    ->timezone('UTC')
+    ->onQueue('exchange_rates');
