@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTOs\TransactionSubType\CreateTransactionSubtypeData;
+use App\DTOs\TransactionSubtype\CreateTransactionSubtypeData;
 use App\DTOs\TransactionSubtype\UpdateTransactionSubtypeData;
 use App\Models\TransactionSubtype;
 use App\Repositories\Interfaces\TransactionSubtypeRepository;
