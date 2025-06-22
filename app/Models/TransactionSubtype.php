@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class User extends Model
+class TransactionSubtype extends Model
 {
     use HasUuid, HasFactory;
 
@@ -14,19 +14,18 @@ class User extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone_number',
-        'email',
+        'name',
+        'slug',
+        'transaction_type_id',
     ];
 
-    public function accounts()
+    public function transactionType()
     {
-        return $this->hasMany(Account::class);
+        return $this->belongsTo(TransactionType::class);
     }
 
     public function transactions()
     {
-        return $this->hasManyThrough(Transaction::class, Account::class);
+        return $this->hasMany(Transaction::class);
     }
 }

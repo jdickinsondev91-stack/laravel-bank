@@ -2,22 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class AccountType extends Model
 {
     use HasUuid, HasFactory;
 
     public $incrementing = false;
     protected $keyType = 'string';
-
+    
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone_number',
-        'email',
+        'name',
+        'slug',
     ];
 
     public function accounts()
