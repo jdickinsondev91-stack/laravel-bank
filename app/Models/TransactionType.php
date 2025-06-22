@@ -10,6 +10,7 @@ class TransactionType extends Model
 {
     use HasUuid, HasFactory;
 
+    
     public $incrementing = false;
     protected $keyType = 'string';
     
