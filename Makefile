@@ -1,34 +1,68 @@
-DOCKER_COMPOSE = docker-compose -f build/docker-compose.yml
+# Variables
+COMPOSE = docker-compose
+PHP     = $(COMPOSE) exec app php
+ARTISAN = $(PHP) artisan
+NPM     = $(COMPOSE) exec node npm
 
+# Build and start containers
 up:
-	$(DOCKER_COMPOSE) up -d --build
+	$(COMPOSE) up -d --build
 
+# Stop containers
 down:
-	$(DOCKER_COMPOSE) down
+	$(COMPOSE) down
 
+# Restart containers
 restart:
-	$(DOCKER_COMPOSE) down
-	$(DOCKER_COMPOSE) up -d --build
+	$(COMPOSE) down && $(COMPOSE) up -d
 
-logs:
-	$(DOCKER_COMPOSE) logs -f
-
-artisan:
-	$(DOCKER_COMPOSE) exec app php artisan $(filter-out $@,$(MAKECMDGOALS))
-
-composer:
-	$(DOCKER_COMPOSE) exec app composer $(filter-out $@,$(MAKECMDGOALS))
-
-migrate:
-	$(DOCKER_COMPOSE) exec app php artisan migrate
-
-seed:
-	$(DOCKER_COMPOSE) exec app php artisan db:seed
-
-test:
-	$(DOCKER_COMPOSE) exec app php artisan test
-
+# App shell (PHP container)
 bash:
-	$(DOCKER_COMPOSE) exec app bash
+	$(COMPOSE) exec app bash
 
-.PHONY: up down restart logs artisan composer migrate seed test bash
+# Run Composer install
+composer-install:
+	$(COMPOSE) exec app composer install
+
+# Run Laravel migrations
+migrate:
+	$(ARTISAN) migrate
+
+# Run Laravel seeders
+seed:
+	$(ARTISAN) db:seed
+
+# Rollback migrations
+rollback:
+	$(ARTISAN) migrate:rollback
+
+# Clear caches
+clear:
+	$(ARTISAN) config:clear && \
+	$(ARTISAN) cache:clear && \
+	$(ARTISAN) route:clear && \
+	$(ARTISAN) view:clear
+
+# Laravel key generate
+key:
+	$(ARTISAN) key:generate
+
+# Permissions fix (on host)
+permissions:
+	sudo chown -R $$(id -u):$$(id -g) storage bootstrap/cache && chmod -R 775 storage bootstrap/cache
+
+# Show logs
+logs:
+	$(COMPOSE) logs -f
+
+# PostgreSQL shell
+psql:
+	$(COMPOSE) exec db psql -U laravel -d laravel
+
+# Run PHP tests
+test:
+	$(ARTISAN) test
+
+# Generate JWT Token
+jwt:
+	$(ARTISAN) jwt:secret
