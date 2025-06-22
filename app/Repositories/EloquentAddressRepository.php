@@ -26,7 +26,7 @@ class EloquentAddressRepository implements AddressRepository
 
     public function create(CreateAddressData $data): Address
     {
-        return $this->model->create($data);
+        return $this->model->create($data->toArray());
     }
 
     public function update(string $id, UpdateAddressData $data): ?Address

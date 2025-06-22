@@ -12,9 +12,10 @@ class CurrencyFactory extends Factory
     public function definition()
     {
         return [
+            'id' => $this->faker->unique()->uuid,
             'name' => $this->faker->word,
             'code' => $this->faker->currencyCode,
-            'symbol' => $this->faker->currencySymbol,
+            'symbol' => $this->faker->randomElement(['$', '€', '£', '¥', '₹']),
             'decimal_places' => $this->faker->numberBetween(0, 4),
             'is_active' => $this->faker->boolean,
         ];

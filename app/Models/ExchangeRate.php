@@ -14,6 +14,7 @@ class ExchangeRate extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
+        'id',
         'base_currency_id',
         'target_currency_id',
         'rate',
