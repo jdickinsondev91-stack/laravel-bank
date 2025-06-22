@@ -24,6 +24,11 @@ class EloquentCurrencyRepository implements CurrencyRepository
         return $this->model->find($id);
     }
 
+    public function findByCode(string $code): ?Currency
+    {
+        return $this->model->where('code', $code)->first();
+    }
+
     public function create(CreateCurrencyData $data): Currency
     {
         return $this->model->create($data->toArray());

@@ -26,7 +26,7 @@ class EloquentTransactionSubtypeRepository implements TransactionSubtypeReposito
 
     public function create(CreateTransactionSubtypeData $data): TransactionSubtype
     {
-        return $this->model->create($data);
+        return $this->model->create($data->toArray());
     }
 
     public function update(string $id, UpdateTransactionSubtypeData $data): ?TransactionSubtype

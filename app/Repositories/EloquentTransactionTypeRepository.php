@@ -26,7 +26,7 @@ class EloquentTransactionTypeRepository implements TransactionTypeRepository
 
     public function create(CreateTransactionTypeData $data): TransactionType
     {
-        return $this->model->create($data);
+        return $this->model->create($data->toArray());
     }
 
     public function update(string $id, UpdateTransactionTypeData $data): ?TransactionType

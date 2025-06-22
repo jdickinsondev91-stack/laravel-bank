@@ -13,8 +13,8 @@ class CreateExchangeRateData
     {
         $dto = new self();
 
-        $dto->fromCurrencyId = $data['from_currency_id'] ?? '';
-        $dto->toCurrencyId = $data['to_currency_id'] ?? '';
+        $dto->fromCurrencyId = $data['base_currency_id'] ?? '';
+        $dto->toCurrencyId = $data['target_currency_id'] ?? '';
         $dto->rate = $data['rate'] ?? 0.0;
         $dto->rateDate = $data['rate_date'] ?? date('Y-m-d');
 
@@ -24,8 +24,8 @@ class CreateExchangeRateData
     public function toArray(): array
     {
         return [
-            'from_currency_id' => $this->fromCurrencyId,
-            'to_currency_id' => $this->toCurrencyId,
+            'base_currency_id' => $this->fromCurrencyId,
+            'target_currency_id' => $this->toCurrencyId,
             'rate' => $this->rate,
             'rate_date' => $this->rateDate,
         ];

@@ -13,6 +13,8 @@ interface CurrencyRepository
   
     public function findById(string $id): ?Currency;
 
+    public function findByCode(string $code): ?Currency;
+
     public function create(CreateCurrencyData $data): Currency;
 
     public function update(string $id, UpdateCurrencyData $data): ?Currency;

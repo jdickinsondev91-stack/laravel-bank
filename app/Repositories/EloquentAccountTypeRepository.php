@@ -28,7 +28,7 @@ class EloquentAccountTypeRepository implements AccountTypeRepository
 
     public function create(CreateAccountTypeData $data): AccountType
     {
-        return $this->model->create($data);
+        return $this->model->create($data->toArray());
     }
 
     public function update(string $id, UpdateAccountTypeData $data): ?AccountType
