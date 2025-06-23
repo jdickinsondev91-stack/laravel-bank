@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamp('rate_date');
             $table->timestamps();
 
-            $table->foreign('base_currency_id')->references('id')->on('currencies');
-            $table->foreign('target_currency_id')->references('id')->on('currencies');
+            $table->foreign('base_currency_id')->references('id')->on('currencies')->onDelete('cascade');
+            $table->foreign('target_currency_id')->references('id')->on('currencies')->onDelete('cascade');
 
             $table->unique(['base_currency_id', 'target_currency_id', 'rate_date']);
         });

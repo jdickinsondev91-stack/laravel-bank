@@ -5,6 +5,7 @@ namespace App\Repositories\Interfaces;
 use App\DTOs\Currency\CreateCurrencyData;
 use App\DTOs\Currency\UpdateCurrencyData;
 use App\Models\Currency;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 interface CurrencyRepository
@@ -20,4 +21,8 @@ interface CurrencyRepository
     public function update(string $id, UpdateCurrencyData $data): ?Currency;
 
     public function delete(string $id): bool;
+
+    public function deleteMultiple(array $ids): void;
+
+    public function getTableQuery(): Builder;
 }
