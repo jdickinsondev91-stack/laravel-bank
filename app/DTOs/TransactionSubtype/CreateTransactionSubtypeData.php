@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\DTOs\TransactionSubType;
+namespace App\DTOs\TransactionSubtype;
 
 class CreateTransactionSubtypeData
 {

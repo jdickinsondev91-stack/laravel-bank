@@ -6,6 +6,7 @@ use App\DTOs\Currency\CreateCurrencyData;
 use App\DTOs\Currency\UpdateCurrencyData;
 use App\Models\Currency;
 use App\Repositories\Interfaces\CurrencyRepository;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class EloquentCurrencyRepository implements CurrencyRepository
@@ -51,5 +52,15 @@ class EloquentCurrencyRepository implements CurrencyRepository
             return $currency->delete();
         }
         return false;
+    }
+
+    public function deleteMultiple(array $ids): void 
+    {
+        $this->model->whereIn('id', $ids)->delete();
+    }
+
+    public function getTableQuery(): Builder
+    {
+        return $this->model->query();
     }
 }
